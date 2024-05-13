@@ -30,35 +30,24 @@ services:
     networks:
       - proxy
 
-  agent:
-    image: portainer/agent
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /var/lib/docker/volumes:/var/lib/docker/volumes
-    networks:
-      - agent_network
-      - proxy
-
   portainer:
     image: portainer/portainer-ce
     container_name: portainer
-    command: -H tcp://tasks.agent:9001 --tlsskipverify
+    command: --admin-password-file /tmp/portainer_password
     ports:
       - 9443:9443
     volumes:
       - portainer_data:/data
       - ./secrets/portainer_password:/tmp/portainer_password
       - /var/run/docker.sock:/var/run/docker.sock
+
+  tunnel:
+    container_name: cloudflared-tunnel
+    image: cloudflare/cloudflared
+    restart: unless-stopped
+    command: tunnel run
     environment:
-      - VIRTUAL_HOST=portainer.neurobagel.org
-      - VIRTUAL_PORT=9000
-      - LETSENCRYPT_HOST=portainer.neurobagel.org
-      - LETSENCRYPT_EMAIL=info@neurobagel.org
-    networks:
-      - proxy
-      - agent_network
-    depends_on:
-      - agent
+      TUNNEL_TOKEN: ${CLOUDFLARE_TOKEN}
 
 volumes:
   conf:
@@ -70,4 +59,3 @@ volumes:
 
 networks:
   proxy:
-  agent_network:
