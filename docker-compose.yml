@@ -36,10 +36,13 @@ services:
     command: --admin-password-file /tmp/portainer_password
     ports:
       - 9443:9443
+      - 9000:9000
     volumes:
       - portainer_data:/data
       - ./secrets/portainer_password:/tmp/portainer_password
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - cloudflare
 
   tunnel:
     container_name: cloudflared-tunnel
@@ -48,6 +51,8 @@ services:
     command: tunnel run
     environment:
       TUNNEL_TOKEN: ${CLOUDFLARE_TOKEN}
+    networks:
+      - cloudflare
 
 volumes:
   conf:
@@ -59,3 +64,4 @@ volumes:
 
 networks:
   proxy:
+  cloudflare:
