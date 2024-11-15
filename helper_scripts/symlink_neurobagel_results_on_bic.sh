@@ -44,7 +44,7 @@ for path in $session_paths; do
             cat <<EOF > "${TARGET_DIR}/${dataset_root}/README.md"
 This directory was automatically generated and contains symlinks to a subset of dataset subjects/sessions matching a Neurobagel query, who have BIDS data available on the BIC.
             
-IMPORTANT: This directory imitates the structure of the original BIDS dataset, but *is not actually a valid BIDS dataset itself*.
+IMPORTANT: This directory imitates the structure of the original BIDS dataset, but is NOT actually a valid BIDS dataset itself!
 The bids/ subdirectory can be passed as input to processing pipelines by skipping the BIDS validation step.
 EOF
         fi
