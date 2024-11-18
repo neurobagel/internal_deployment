@@ -15,7 +15,7 @@ session_paths=$(cut -d $'\t' -f $SESSION_PATH_COL_IDX $RESULTS_TSV | grep -v "${
 
 for path in $session_paths; do
     if [ ! -d "$path" ]; then
-        echo "Directory does not exist or is not readable: $path"
+        echo "Source directory does not exist or is not readable: $path"
         continue
     else
         if basename "$path" | grep -q "ses-"; then
