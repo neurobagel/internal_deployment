@@ -2,7 +2,7 @@
 
 # USAGE: ./symlink_neurobagel_results_on_bic.sh <PATH TO NEUROBAGEL QUERY RESULTS TSV> <DESTINATION DIRECTORY FOR SYMLINKS>
 
-# USAGE EXAMPLE:  ./symlink_neurobagel_results_on_bic.sh cohort-participant-machine-results.tsv /home/new_neurobagel_cohort
+# USAGE EXAMPLE:  ./symlink_neurobagel_results_on_bic.sh neurobagel-query-results.tsv /home/new_neurobagel_cohort
 
 RESULTS_TSV=$1
 TARGET_DIR=$2
