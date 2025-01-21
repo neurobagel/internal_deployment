@@ -10,8 +10,8 @@ TARGET_DIR=$2
 SESSION_PATH_COL="ImagingSessionPath"
 SESSION_PATH_COL_IDX=6
 
-LOG_FILE="./symlink_neurobagel_results_on_bic.log"
-LOCK_FILE="./symlink_neurobagel_results_on_bic.lock"
+LOG_FILE="/data/pd/neurobagel/scripts/symlink_neurobagel_results_on_bic.log"
+LOCK_FILE="/data/pd/neurobagel/scripts/symlink_neurobagel_results_on_bic.lock"
 
 # Extract session path column and remove i) the column header, ii) any empty lines, iii) any "protected" lines, and iv) duplicates (just in case)
 session_paths=$(cut -d $'\t' -f $SESSION_PATH_COL_IDX $RESULTS_TSV | grep -v "${SESSION_PATH_COL}" | grep -v "^$" | grep -v "protected" | sort | uniq)
