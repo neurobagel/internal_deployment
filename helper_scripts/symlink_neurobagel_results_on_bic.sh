@@ -54,7 +54,8 @@ EOF
     fi
 done
 
-# If log file exists, write details of run to log file
+# If log file exists, write datetime and user ID of run to log file
+# This keeps a basic record of how many times and by how many unique users the script was run
 if [ -f $LOG_FILE ]; then
     # Check if lock file exists (it should be pre-created, because not all users will have write permissions to the shared directory itself)
     if [ -f $LOCK_FILE ]; then
@@ -64,5 +65,6 @@ if [ -f $LOG_FILE ]; then
         # If the lockfile is already "locked", flock first waits until the lock is released
         flock 200
     fi
+    # Log that script was run (only date and user ID) for debugging and to get a sense of script usage
     echo -e "Date run: $(date)\tUser ID: $(id -u)">> $LOG_FILE
 fi
